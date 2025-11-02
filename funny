@@ -1,0 +1,22 @@
+// 简单的股票查询功能
+async function getStockPrice(symbol) {
+    try {
+        console.log(`正在查询 ${symbol}...`);
+        
+        // 使用免费的金融API（示例）
+        const response = await fetch(`https://api.twelvedata.com/price?symbol=${symbol}&apikey=demo`);
+        const data = await response.json();
+        
+        if(data.price) {
+            console.log(`✅ ${symbol} 当前价格: $${data.price}`);
+        } else {
+            console.log('❌ 未找到该股票数据');
+        }
+    } catch (error) {
+        console.log('❌ 查询失败，请检查网络连接');
+    }
+}
+
+// 使用示例
+getStockPrice('AAPL');
+getStockPrice('TSLA');
